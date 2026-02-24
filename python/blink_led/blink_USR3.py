@@ -39,7 +39,8 @@ at a rate of 5Hz (5 times per second). The script will run indefinitely until
 terminated by the user (e.g. by pressing Ctrl-C in the terminal).
 """
 import time
-import Adafruit_BBIO.GPIO as GPIO
+import Adafruit_BBIO.GPIO as GPIO # type: ignore
+# adding a bunch of these type ignore comments so my laptop IDE doesn't complain about this when i'm not on the beaglebone.
 
 class USR3LED:
     def __init__(self):

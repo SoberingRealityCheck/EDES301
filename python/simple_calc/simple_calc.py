@@ -82,7 +82,7 @@ operators = {
 }
 
 try:
-  input = raw_input
+  input = raw_input # type: ignore
 except NameError:
   pass
 

@@ -87,7 +87,7 @@ Software API:
 """
 import time
 
-import Adafruit_BBIO.GPIO as GPIO
+import Adafruit_BBIO.GPIO as GPIO # type: ignore
 
 # ------------------------------------------------------------------------
 # Constants
