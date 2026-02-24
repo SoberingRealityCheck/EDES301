@@ -74,10 +74,17 @@ operators = {
     "+" : operator.add,
     "-" : operator.sub,
     "*" : operator.mul,
-    "/" : operator.truediv
+    "/" : operator.truediv,
+    ">>": operator.rshift,
+    "<<": operator.lshift,
+    "%": operator.mod,
+    "**": operator.pow
 }
 
-
+try:
+  input = raw_input
+except NameError:
+  pass
 
 # ------------------------------------------------------------------------
 # Functions
@@ -88,10 +95,24 @@ def get_user_input():
         Returns tuple:  (number, number, function) or 
                         (None, None, None) if inputs invalid
     """
+    # PYTHON 2 Compatibility via stackoverflow post. 
+    # https://stackoverflow.com/questions/21731043/use-of-input-raw-input-in-python-2-and-3
+
+    
     try:
       number1 = float(input("Enter first number: "))
       number2 = float(input("Enter second number: "))
       op = input(f"Enter function (valid values are {list(operators.keys())}): ")
+
+      # this is a bit stupid but we can just like convert them specifically for bitwise ops
+      if op == ">>" or op == "<<":
+        if number1 != int(number1) or number2 != int(number2):
+          print("""
+              Bitwise operators can only handle integers. 
+              Converting from float to int... 
+              """)
+        number1 = int(number1)
+        number2 = int(number2)
 
       func = operators.get(op)
     except:
