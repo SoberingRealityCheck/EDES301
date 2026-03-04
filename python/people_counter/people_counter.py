@@ -85,7 +85,7 @@ class PeopleCounter():
     def _setup(self):
         """Setup the hardware components."""
         # Initialize Display
-        self.display.setup()
+        self.display.clear()
         print("People Counter setup()")
 
     # End def
