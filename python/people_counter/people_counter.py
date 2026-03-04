@@ -97,18 +97,19 @@ class PeopleCounter():
         button_press_time            = 0.0      # Time button was pressed (in seconds)
         
         while(1):
-            # !!! Remove this when updating !!!
-            print("Counter running")
-            time.sleep(1)
-            # !!! Remove this when updating !!!
-    
             # Wait for button press / release
-
+            self.button.wait_for_press()
             # Get the press time
+            button_press_time = self.button.get_last_press_duration()
 
             # Compare time to increment or reset people_count
+            if button_press_time < self.reset_time:
+                people_count += 1
+            else:
+                people_count = 0
 
             # Update the display
+            self.display.update(people_count)
 
     # End def
 
