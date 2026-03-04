@@ -173,7 +173,7 @@ class HT16K33():
 
         self.bus     = bus
         self.address = address
-        self.command = "i2cset -y {0} {1}".format(bus, address)
+        self.command = "/usr/sbin/i2cset -y {0} {1}".format(bus, address)
 
         # Set up display        
         self._setup(blink, brightness)
