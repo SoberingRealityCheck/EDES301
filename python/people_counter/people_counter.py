@@ -136,14 +136,15 @@ if __name__ == '__main__':
     print("Program Start")
 
     # Create instantiation of the people counter
+    people_counter = PeopleCounter()
 
     try:
         # Run the people counter
-        pass  # Replace this line
+        people_counter.run()
 
     except KeyboardInterrupt:
         # Clean up hardware when exiting
-        pass  # Replace this line
+        people_counter.cleanup()
 
     print("Program Complete")
 
