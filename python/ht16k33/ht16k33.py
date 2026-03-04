@@ -380,8 +380,8 @@ if __name__ == '__main__':
     time.sleep(1)
 
     for _ in range(5):
-        print("Clay")
-        display.text("Clay")
+        print("CLAY")
+        display.text("CLAY")
         time.sleep(1)
         print("IS")
         display.text("IS")
