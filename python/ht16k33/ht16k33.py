@@ -176,7 +176,7 @@ class HT16K33():
         self.command = "i2cset -y {0} {1}".format(bus, address)
 
         # Set up display        
-        self.setup(blink, brightness)
+        self._setup(blink, brightness)
 
         # Set display to blank
         self.blank()
