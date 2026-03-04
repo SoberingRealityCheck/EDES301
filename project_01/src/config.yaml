@@ -1,0 +1,11 @@
+# all of these are placeholder values, update as needed
+LEFT_BUTTON_PIN : 2 # placeholder, GPIO
+RIGHT_BUTTON_PIN : 3 # placeholder, GPIO
+SELECT_BUTTON_PIN : 4 # placeholder, GPIO
+BACK_BUTTON_PIN : 5 # placeholder, GPIO
+I2C_SDA_PIN : 9 # placeholder, I2C
+I2C_SCL_PIN : 11 # placeholder, I2C
+# 13 gpio capable pins for the display
+DISPLAY_GPIO_PINS : [6, 7, 8, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20] # placeholder, GPIO
+
+PROJECT_ROOT : "/var/lib/cloud9/EDES301/project_01" 
