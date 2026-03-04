@@ -171,9 +171,15 @@ class HT16K33():
         print("    Bus     = {0}".format(bus))
         print("    Address = 0x{0:x}".format(address))
 
+        self.bus     = bus
+        self.address = address
+        self.command = "i2cset -y {0} {1}".format(bus, address)
+
         # Set up display        
-        
+        self.setup(blink, brightness)
+
         # Set display to blank
+        self.blank()
             
     # End def
     
@@ -285,9 +291,13 @@ class HT16K33():
         
         Will throw a ValueError if number is not between 0 and 9999.
         """
-
-        # Modify code to implement this function
-        print("Set value = {0}".format(value)) # Remove when updating code
+        if ((value < 0) or (value > HT16K33_MAX_VALUE)):
+            raise ValueError("Value must be between 0 and 9999")
+        
+        self.set_digit(3, (value % 10))
+        self.set_digit(2, ((value // 10) % 10))
+        self.set_digit(1, ((value // 100) % 10))
+        self.set_digit(0, ((value // 1000) % 10))
 
     # End def
     
@@ -309,9 +319,10 @@ class HT16K33():
         for i, char in enumerate(value):
             try:
                 # Translate the character into the value needed for hex display
-                
+                char_value = LETTERS[char]
+
                 # Set the display digit with the character value
-                print("Set char  = {0}".format(char)) # Remove when updating code
+                self.set_digit_raw(i, char_value)
                 
             except:
                 raise ValueError("Character {0} not supported".format(char))
