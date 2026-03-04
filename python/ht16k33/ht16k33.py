@@ -379,6 +379,17 @@ if __name__ == '__main__':
     display.set_colon(True)
     time.sleep(1)
 
+    for _ in range(5):
+        print("Clay")
+        display.text("Clay")
+        time.sleep(1)
+        print("IS")
+        display.text("IS")
+        time.sleep(1)
+        print("COOL")
+        display.text("COOL")
+        time.sleep(1)
+
     display.clear()    
     print("Test Finished.")
 
