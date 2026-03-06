@@ -95,9 +95,7 @@ class Potentiometer():
         """ Setup the hardware components. """
         # Initialize Analog Input
 
-        # !!! NEED TO IMPLEMENT !!! #
-        pass 
-        # !!! NEED TO IMPLEMENT !!! #
+        ADC.setup()
 
     # End def
 
@@ -109,9 +107,7 @@ class Potentiometer():
         """
         # Read raw value from ADC
 
-        # !!! NEED TO IMPLEMENT !!! #
-        return 0
-        # !!! NEED TO IMPLEMENT !!! #
+        return ADC.read_raw(self.pin)
 
     # End def
 
