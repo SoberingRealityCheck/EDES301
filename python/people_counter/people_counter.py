@@ -102,6 +102,7 @@ class PeopleCounter():
             # Get the press time
             button_press_time = self.button.get_last_press_duration()
 
+            print("Button Press Time: " + str(button_press_time))
             # Compare time to increment or reset people_count
             if button_press_time < self.reset_time:
                 people_count += 1
