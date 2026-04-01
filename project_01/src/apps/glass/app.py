@@ -116,10 +116,10 @@ class App(BaseApp):
         pass  # display already cleared by BaseApp.stop()
 
     def on_left(self) -> None:
-        self.fov = max(5, self.fov - 5)  # Decrease FOV to zoom in
+        self.fov = min(90, self.fov + 5)  # Increase FOV to zoom out
 
     def on_right(self) -> None:
-        self.fov = min(90, self.fov + 5)  # Increase FOV to zoom out
+        self.fov = max(5, self.fov - 5)  # Decrease FOV to zoom in
 
     def on_select(self) -> None:
         pass
