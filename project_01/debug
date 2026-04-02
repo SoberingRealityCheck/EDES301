@@ -31,13 +31,9 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 # --------------------------------------------------------------------------
 # 
-# Run the Window to Another World device
+# Run the Window to Another World pygame simulation
 # 
 # --------------------------------------------------------------------------
-cd /var/lib/cloud9/EDES301/project_01
 
-./configure_pins.sh
-
-PYTHONPATH=$(IFS=; echo "${dirs[*]}") python3 run_device.py
-
-
+source .venv/bin/activate
+python3 run_sim.py
