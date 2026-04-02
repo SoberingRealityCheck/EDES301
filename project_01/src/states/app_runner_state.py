@@ -18,6 +18,8 @@ class AppRunnerState(State):
     Monitors app.is_done() and the back button. Returns to 'menu' when done.
     """
 
+    EXIT_TO_MENU_CHIME = [(392, 0.1), (330, 0.1), (262, 0.1)]  # G4 → E4 → C4 falling arpeggio
+
     def enter(self, hw, ctx: dict) -> None:
         super().enter(hw, ctx)
         self._next_state = None
@@ -53,6 +55,7 @@ class AppRunnerState(State):
 
     def _on_back(self) -> None:
         print("[AppRunner] Back → menu.")
+        self.hw.buzzer.play_sequence(self.EXIT_TO_MENU_CHIME)
         self._next_state = 'menu'
 
     def _stop_app(self) -> None:

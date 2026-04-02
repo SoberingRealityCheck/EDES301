@@ -118,9 +118,17 @@ class App(BaseApp):
 
     def on_left(self) -> None:
         self.fov = min(90, self.fov + 5)  # Increase FOV to zoom out
+        # Cmaj9 descending: D6→B5→G5→C5 (9th→maj7→5th→root) — warm, settling
+        self.hw.buzzer.play_sequence([
+            (1175, 0.03), (988, 0.03), (784, 0.03), (523, 0.05),
+        ])
 
     def on_right(self) -> None:
         self.fov = max(5, self.fov - 5)  # Decrease FOV to zoom in
+        # Cmaj9 ascending: C5→G5→B5→D6 (root→5th→maj7→9th) — warm, rising
+        self.hw.buzzer.play_sequence([
+            (523, 0.03), (784, 0.03), (988, 0.03), (1175, 0.05),
+        ])
 
     def on_select(self) -> None:
         pass

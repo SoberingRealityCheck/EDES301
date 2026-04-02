@@ -15,6 +15,7 @@ import time
 import threading
 
 from states.boot_state         import BootState
+from states.startup_state      import StartupState
 from states.menu_state         import MenuState
 from states.calibration_state  import CalibrationState
 from states.app_runner_state   import AppRunnerState
@@ -36,6 +37,7 @@ class StateMachine:
 
     _STATE_MAP = {
         'boot':        BootState,
+        'startup':     StartupState,
         'menu':        MenuState,
         'calibration': CalibrationState,
         'app_runner':  AppRunnerState,

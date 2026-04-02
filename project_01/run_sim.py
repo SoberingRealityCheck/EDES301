@@ -37,5 +37,4 @@ from debug_display import DebugDisplay
 if __name__ == "__main__":
     hw = HardwareManager(imu_class=SimulatedIMU, buzzer_class=SimBuzzer)
     sm = StateMachine(hw)
-    sm.start()
-    DebugDisplay(hw, sm).run()
+    DebugDisplay(hw, sm).run()  # starts sm internally after pygame.init()

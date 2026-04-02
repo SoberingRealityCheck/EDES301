@@ -156,11 +156,12 @@ class DebugDisplay:
     # ------------------------------------------------------------------
 
     def run(self) -> None:
-        """Pygame event loop. Call from the main thread after StateMachine.start()."""
+        """Pygame event loop. Starts the StateMachine after pygame is ready."""
         pygame.init()
         self._screen = pygame.display.set_mode((self._W, self._W))
         self._clock  = pygame.time.Clock()
         self._update_title()
+        self.sm.start()   # start here so audio is ready before any sounds play
 
         running = True
         while running:
