@@ -7,7 +7,11 @@ Run from project_01/src/ on the device:
 Or from project_01/:
     python -c "import sys; sys.path.insert(0,'src'); exec(open('run_device.py').read())"
 
-No pygame. StateMachine runs on the main thread.
+Dependencies:
+    - Python 3.10+ (for type annotations)
+    - numpy
+    - PyYAML
+    - Adafruit_BBIO (for real hardware; not needed for simulation)    
 """
 
 import sys

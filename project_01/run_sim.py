@@ -18,7 +18,8 @@ Controls:
     Escape / Q quit
 
 Dependencies:
-    pip install pygame numpy pyyaml
+    uv sync 
+    source venv/bin/activate  # if using the provided virtual environment
 """
 
 import sys

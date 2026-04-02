@@ -4,8 +4,6 @@ NumPy arrays for use in my project.
 
 Usage:
     python png_to_npy.py /path/to/pngs /path/to/npy_output
-
-Enforces a consistent format (32x32 RGB) and saves the arrays as .npy files for easy loading in my app.
 """
 
 from PIL import Image
