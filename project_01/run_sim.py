@@ -28,12 +28,13 @@ _here = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(_here, "src"))
 
 from hardware.drivers.imu.sim_imu import SimulatedIMU
+from hardware.drivers.buzzer.sim_buzzer import SimBuzzer
 from hardware import HardwareManager
 from state_machine import StateMachine
 from debug_display import DebugDisplay
 
 if __name__ == "__main__":
-    hw = HardwareManager(imu_class=SimulatedIMU)
+    hw = HardwareManager(imu_class=SimulatedIMU, buzzer_class=SimBuzzer)
     sm = StateMachine(hw)
     sm.start()
     DebugDisplay(hw, sm).run()

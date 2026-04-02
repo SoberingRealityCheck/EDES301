@@ -23,7 +23,8 @@ import yaml
 
 from hardware.drivers.led_matrix.led_matrix import LEDMatrix
 from hardware.drivers.button.button import Button
-from hardware.drivers.imu.real_imu import RealIMU  # default for on-device
+from hardware.drivers.imu.real_imu import RealIMU          # default for on-device
+from hardware.drivers.buzzer.real_buzzer import RealBuzzer  # default for on-device
 
 
 _config_path = Path(__file__).parent.parent / "config.yaml"
@@ -40,12 +41,17 @@ class HardwareManager:
                     Default: RealIMU. Pass SimulatedIMU for development.
     """
 
-    def __init__(self, imu_class=None):
+    def __init__(self, imu_class=None, buzzer_class=None):
         if imu_class is None:
             imu_class = RealIMU
+        if buzzer_class is None:
+            buzzer_class = RealBuzzer
 
         # Display
         self.display = LEDMatrix(pins=_config.get("DISPLAY_GPIO_PINS"))
+
+        # Buzzer
+        self.buzzer = buzzer_class(pin=_config.get("BUZZER_PIN", "P9_21"))
 
         # IMU
         self.imu = imu_class()

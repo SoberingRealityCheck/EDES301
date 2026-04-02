@@ -20,10 +20,6 @@ def png_to_npy(png_path, npy_path):
     # Convert the image to RGB (in case it's RGBA or grayscale)
     img = img.convert('RGB')
 
-    # Resize the image to 32x32 if it's not already
-    if img.size != (32, 32):
-        img = img.resize((32, 32), Image.NEAREST)
-
     # Convert the image to a NumPy array
     img_array = np.array(img)
 

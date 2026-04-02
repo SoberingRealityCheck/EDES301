@@ -59,6 +59,7 @@ class App(BaseApp):
 
 
     def run(self) -> None:
+        self.hw.buzzer.play_sequence([(523, 0.08), (0, 0.01), (659, 0.07)])
         while self.running:
             frame = self._compute_frame()
             self.hw.display.set_frame(frame)

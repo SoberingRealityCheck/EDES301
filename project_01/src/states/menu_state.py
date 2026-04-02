@@ -64,6 +64,7 @@ class MenuState(State):
             return
         self._idx = (self._idx - 1) % len(self._apps)
         self._display_dirty = True
+        self.hw.buzzer.beep(880, 0.03)
         print(f"[Menu] ← {self._apps[self._idx].name}")
 
     def _on_right(self) -> None:
@@ -71,6 +72,7 @@ class MenuState(State):
             return
         self._idx = (self._idx + 1) % len(self._apps)
         self._display_dirty = True
+        self.hw.buzzer.beep(880, 0.03)
         print(f"[Menu] → {self._apps[self._idx].name}")
 
     def _on_select(self) -> None:
@@ -78,4 +80,5 @@ class MenuState(State):
             return
         self.ctx['selected_app'] = self._apps[self._idx]
         self._next_state = 'calibration'
+        self.hw.buzzer.play_sequence([(784, 0.06), (0, 0.01), (1047, 0.10)])
         print(f"[Menu] Selected: {self._apps[self._idx].name}")
