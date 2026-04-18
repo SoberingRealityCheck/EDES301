@@ -42,7 +42,9 @@ class MenuState(State):
 
     def update(self) -> "str | None":
         if self._display_dirty and self._apps:
-            self.hw.display.set_frame(self._apps[self._idx].icon)
+            frame = np.zeros((32, 64, 3), dtype=np.uint8)
+            frame[:, 16:48] = self._apps[self._idx].icon
+            self.hw.display.set_frame(frame)
             self._display_dirty = False
 
         if self._next_state is not None:

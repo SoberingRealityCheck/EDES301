@@ -1,5 +1,5 @@
 """
-DebugDisplay — pygame "digital clone" of the 32x32 LED matrix.
+DebugDisplay — pygame "digital clone" of the 64x32 LED matrix.
 
 Rendering approach:
     1. Build a core image: each LED is a bright filled circle (not a square block).
@@ -41,7 +41,7 @@ except ImportError:
 # Tuning constants
 # ---------------------------------------------------------------------------
 
-SCALE             = 16      # pixels per LED  →  32 * 16 = 512 px window
+SCALE             = 14      # pixels per LED  →  64 * 14 = 896 px wide, 32 * 14 = 448 px tall
 FPS               = 60
 ARROW_RATE        = 90.0    # deg/s injected while an arrow key is held
 
@@ -141,11 +141,12 @@ class DebugDisplay:
         self.hw    = hw
         self.sm    = state_machine
         self.scale = scale
-        self._W    = 32 * scale
+        self._W    = 64 * scale   # window width
+        self._H    = 32 * scale   # window height
 
         # Precompute per-frame invariants
-        self._mask_tiled = np.tile(_build_led_mask(scale), (32, 32))  # (W, W)
-        self._bg         = np.broadcast_to(BG_COLOR, (self._W, self._W, 3)).copy()
+        self._mask_tiled = np.tile(_build_led_mask(scale), (32, 64))  # (H, W)
+        self._bg         = np.broadcast_to(BG_COLOR, (self._H, self._W, 3)).copy()
         self._sigma      = scale * GLOW_SIGMA_FACTOR
 
         self._screen = None
@@ -158,7 +159,7 @@ class DebugDisplay:
     def run(self) -> None:
         """Pygame event loop. Starts the StateMachine after pygame is ready."""
         pygame.init()
-        self._screen = pygame.display.set_mode((self._W, self._W))
+        self._screen = pygame.display.set_mode((self._W, self._H))
         self._clock  = pygame.time.Clock()
         self._update_title()
         self.sm.start()   # start here so audio is ready before any sounds play
@@ -193,13 +194,13 @@ class DebugDisplay:
         Build the glow-composite frame and blit it to the screen.
 
         Pipeline:
-            pixel_data (32,32,3 uint8)
-            → colors_scaled (512,512,3 float32)  — np.repeat, no loop
-            → core (512,512,3 float32)            — multiply by circular LED mask
-            → glow (512,512,3 float32)            — gaussian blur of core
+            pixel_data (32,64,3 uint8)
+            → colors_scaled (H,W,3 float32)  — np.repeat, no loop
+            → core (H,W,3 float32)            — multiply by circular LED mask
+            → glow (H,W,3 float32)            — gaussian blur of core
             → result = clip(bg + glow*I + core)   — additive composite
         """
-        pixel_data = self.hw.display.pixel_data.data   # (32, 32, 3) uint8
+        pixel_data = self.hw.display.pixel_data.data   # (32, 64, 3) uint8
 
         # Upscale: each pixel fills one SCALE×SCALE cell
         colors_scaled = np.repeat(

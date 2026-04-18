@@ -48,7 +48,7 @@ class HardwareManager:
             buzzer_class = RealBuzzer
 
         # Display
-        self.display = LEDMatrix(pins=_config.get("DISPLAY_GPIO_PINS"))
+        self.display = LEDMatrix()
 
         # Buzzer
         self.buzzer = buzzer_class(pin=_config.get("BUZZER_PIN", "P9_21"))

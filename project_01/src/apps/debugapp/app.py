@@ -27,33 +27,33 @@ class App(BaseApp):
             time.sleep(1 / self.REFRESH_RATE)
 
     def _make_frame(self) -> np.ndarray:
-        frame   = np.zeros((32, 32, 3), dtype=np.uint8)
+        frame   = np.zeros((32, 64, 3), dtype=np.uint8)
         pattern = self.PATTERNS[self._pattern_idx]
 
         if pattern == "checkerboard":
             for y in range(32):
-                for x in range(32):
+                for x in range(64):
                     frame[y, x] = [200, 0, 0] if (x + y) % 2 == 0 else [0, 0, 200]
 
         elif pattern == "gradient":
-            for x in range(32):
-                v = int(x / 31 * 255)
+            for x in range(64):
+                v = int(x / 63 * 255)
                 frame[:, x] = [0, v, 255 - v]
 
         elif pattern == "border":
             frame[0,  :] = [255, 255, 255]
             frame[31, :] = [255, 255, 255]
             frame[:,  0] = [255, 255, 255]
-            frame[:, 31] = [255, 255, 255]
+            frame[:, 63] = [255, 255, 255]
 
         elif pattern == "imu_yaw":
-            # Visualize current yaw as a filled green bar (0–32 columns)
+            # Visualize current yaw as a filled green bar (0–64 columns)
             yaw  = self.hw.imu.get_yaw()           # 0–360
-            cols = int((yaw / 360.0) * 32)
+            cols = int((yaw / 360.0) * 64)
             frame[:, :cols] = [0, 200, 50]
             frame[:, cols:] = [30, 30, 30]
             # White marker line
-            if cols < 32:
+            if cols < 64:
                 frame[:, cols] = [255, 255, 255]
 
         return frame

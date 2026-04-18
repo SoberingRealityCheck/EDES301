@@ -16,7 +16,7 @@ class BootState(State):
     def enter(self, hw, ctx: dict) -> None:
         super().enter(hw, ctx)
         self._start_time = time.time()
-        hw.display.set_frame(np.zeros((32, 32, 3), dtype=np.uint8))
+        hw.display.set_frame(np.zeros((32, 64, 3), dtype=np.uint8))
 
     def update(self) -> "str | None":
         if time.time() - self._start_time >= self.BOOT_DURATION:

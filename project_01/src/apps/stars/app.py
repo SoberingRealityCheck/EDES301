@@ -46,13 +46,13 @@ class App(BaseApp):
             time.sleep(1 / self.refresh_rate)
 
     def _compute_frame(self) -> np.ndarray:
-        """Return a 32x32x3 uint8 frame based on current IMU yaw."""
+        """Return a 32x64x3 uint8 frame based on current IMU yaw."""
         if self._panorama is not None:
             # Real panorama path
             yaw       = self.hw.imu.get_yaw()                 # 0–360 deg
             pan_w     = self._panorama.shape[1]
             col_start = int((yaw / 360.0) * pan_w) % pan_w
-            col_end   = col_start + 32
+            col_end   = col_start + 64
 
             if col_end <= pan_w:
                 return self._panorama[:, col_start:col_end, :].copy()
@@ -69,7 +69,7 @@ class App(BaseApp):
         r   = int((math.sin(t * 1.0 + hue * 6.28)       + 1) / 2 * 200)
         g   = int((math.sin(t * 1.5 + hue * 6.28 + 2.0) + 1) / 2 * 200)
         b   = int((math.sin(t * 0.8 + hue * 6.28 + 4.0) + 1) / 2 * 255)
-        return np.full((32, 32, 3), [r, g, b], dtype=np.uint8)
+        return np.full((32, 64, 3), [r, g, b], dtype=np.uint8)
 
     def cleanup(self) -> None:
         pass  # display already cleared by BaseApp.stop()

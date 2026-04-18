@@ -11,21 +11,20 @@ from pathlib import Path
 
 
 def _make_splash() -> np.ndarray:
-    """Display the splash screen located at
-    src/states/assets/splash.npy as a 32x32x3 uint8 frame.
+    """Load splash.npy (32x32x3) and center it on a 32x64 frame.
 
-    Fades from black to full brightness over the first second, then
-    holds at full brightness.
-
-    If the file is missing or invalid, returns a solid magenta frame as a fallback.
+    Falls back to a solid magenta 32x64 frame if the file is missing or invalid.
     """
+    frame = np.zeros((32, 64, 3), dtype=np.uint8)
     splash_path = Path(__file__).parent / "assets" / "splash.npy"
     if splash_path.exists():
         splash = np.load(splash_path)
         if splash.shape == (32, 32, 3) and splash.dtype == np.uint8:
-            return splash
-    # Fallback: solid magenta if no valid splash found
-    return np.full((32, 32, 3), [255, 0, 255], dtype=np.uint8)
+            frame[:, 16:48] = splash
+            return frame
+    frame[:, 16:48] = 255  # magenta fallback centered
+    frame[:, 16:48, 1] = 0
+    return frame
 
 
 class StartupState(State):

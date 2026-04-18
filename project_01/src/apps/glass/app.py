@@ -3,12 +3,12 @@ Glass app — renders a 360° panoramic image slice based on IMU pitch and yaw.
 
 The device acts as a "window": rotating the device left/right and up/down pans
 through the panorama. The IMU's current yaw and pitch (relative to calibration zero) 
-select which 32x32 slice to display.
+select which 64x32 slice to display.
 
-The frame is actually a downscaled portion of the image, based on a customizable FOV 
-parameter. Pressing the left and right buttons adjusts the FOV, 
+The frame is actually a downscaled portion of the image, based on a customizable FOV
+parameter. Pressing the left and right buttons adjusts the FOV,
 allowing you to zoom in and out of the panorama. The FOV is applied symmetrically in both
-directions, so a smaller FOV means a smaller slice of the panorama is stretched to fill the 32x32 display.
+directions, so a smaller FOV means a smaller slice of the panorama is stretched to fill the 64x32 display.
 
 Upon initializing the program, the app maps the top and bottom of the panorama to the possible
 180 degrees of pitch, and the left and right edges to the 360 degrees of yaw. The app then continuously
@@ -85,7 +85,7 @@ class App(BaseApp):
         return fov_x, fov_y
 
     def _compute_frame(self) -> np.ndarray:
-        """Return a 32x32x3 uint8 frame based on current IMU yaw and pitch."""
+        """Return a 32x64x3 uint8 frame based on current IMU yaw and pitch."""
         if self._panorama is not None:
             yaw   = self.hw.imu.get_yaw()   # 0–360 deg
             pitch = self.hw.imu.get_pitch() # -90–90 deg
@@ -111,7 +111,7 @@ class App(BaseApp):
         r     = int((math.sin(t * 1.0 + yaw / 360.0 * math.pi * 2) + 1) / 2 * 200)
         g     = int((math.sin(t * 1.5 + pitch / 180.0 * math.pi + 2.0) + 1) / 2 * 200)
         b     = int((math.sin(t * 0.8 + yaw / 360.0 * math.pi * 4 + pitch / 180.0 * math.pi * 2 + 4.0) + 1) / 2 * 255)
-        return np.full((32, 32, 3), [r, g, b], dtype=np.uint8)
+        return np.full((32, 64, 3), [r, g, b], dtype=np.uint8)
 
     def cleanup(self) -> None:
         pass  # display already cleared by BaseApp.stop()
@@ -134,11 +134,11 @@ class App(BaseApp):
         pass
 
     def _sample_panorama_bilinear(self, center_x, center_y, fov_x, fov_y) -> np.ndarray:
-        """Sample a 32x32 view with bilinear interpolation from fractional coordinates."""
+        """Sample a 32x64 view with bilinear interpolation from fractional coordinates."""
         pan_h, pan_w, _ = self._panorama.shape
 
         # Pixel-center aligned sampling grid over the requested FOV window.
-        x_offsets = (np.arange(32, dtype=np.float32) + 0.5 - 16.0) * (fov_x / 32.0)
+        x_offsets = (np.arange(64, dtype=np.float32) + 0.5 - 32.0) * (fov_x / 64.0)
         y_offsets = (np.arange(32, dtype=np.float32) + 0.5 - 16.0) * (fov_y / 32.0)
         grid_x, grid_y = np.meshgrid(center_x + x_offsets, center_y + y_offsets)
 

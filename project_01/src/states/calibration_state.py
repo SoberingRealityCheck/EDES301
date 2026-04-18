@@ -75,19 +75,19 @@ class CalibrationState(State):
         progress : float in [0.0, 1.0]
         Left portion is green (filled), right is red (unfilled).
         """
-        frame      = np.zeros((32, 32, 3), dtype=np.uint8)
-        filled_cols = int(round(progress * 32))
+        frame      = np.zeros((32, 64, 3), dtype=np.uint8)
+        filled_cols = int(round(progress * 64))
 
         # Filled (green)
         if filled_cols > 0:
             frame[:, :filled_cols] = [0, 220, 80]
 
         # Unfilled (dim red)
-        if filled_cols < 32:
+        if filled_cols < 64:
             frame[:, filled_cols:] = [120, 20, 20]
 
         # Bright dividing line
-        if 0 < filled_cols < 32:
+        if 0 < filled_cols < 64:
             frame[:, filled_cols - 1] = [255, 255, 255]
 
         self.hw.display.set_frame(frame)
