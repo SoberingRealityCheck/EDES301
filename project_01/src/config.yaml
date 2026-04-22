@@ -13,7 +13,7 @@ DISPLAY_GPIO_PINS : [
   "P2_4", "P1_34", "P2_33", "P2_18", "P2_8"]
 
 # Buzzer — hardware PWM pin for HCW-KC1206 passive piezo
-BUZZER_PIN : "P2_18" 
+BUZZER_PIN : "P1_12" 
 
 # IMU (I2C) — MPU-6050 default address
 IMU_I2C_BUS     : 1

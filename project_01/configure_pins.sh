@@ -51,6 +51,7 @@ config-pin P2_16 pwm # pin 12
 config-pin P2_17 pwm # pin 13
 
 ### GPIO PIN 14: PWN OUTPUT FOR BUZZER
+config-pin P1_12 pwm # buzzer
 config-pin P2_18 pwm # pin 14
 
 ### GPIO PINS 15 - 18: DIGITAL OUTPUTS FOR BUTTONS
