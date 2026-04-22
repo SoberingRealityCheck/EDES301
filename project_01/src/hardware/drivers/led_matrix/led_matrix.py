@@ -36,6 +36,8 @@ class LEDMatrix:
             print("LEDMatrix initialized in SIMULATION mode.")
 
         self.pixel_data = PixelDataArray(WIDTH, HEIGHT)
+        for _ in range(8):
+            self.clear()
 
     # ------------------------------------------------------------------
     # Primary interface (PIL Image)
