@@ -35,30 +35,31 @@
 ### PIN ASSIGNMENTS:
 
 ### GPIO PINS 1 - 13: PWM OUTPUTS FOR LED MATRIX
-config-pin P2_01 pwm # pin 1
-# the actual P2_02 pin is 
-config-pin P2_03 pwm # pin 2
-config-pin P2_04 pwm # pin 3
-config-pin P2_05 pwm # pin 4
-config-pin P2_06 pwm # pin 5
-config-pin P2_07 pwm # pin 6
-config-pin P2_08 pwm # pin 7
-config-pin P2_10 pwm # pin 8
-config-pin P2_12 pwm # pin 9
-config-pin P2_14 pwm # pin 10
-config-pin P2_15 pwm # pin 11
-config-pin P2_16 pwm # pin 12
-config-pin P2_17 pwm # pin 13
+config-pin P2_02 gpio
+config-pin P2_03 gpio
+config-pin P2_06 gpio
+config-pin P1_20 gpio
+config-pin P2_22 gpio
+config-pin P2_24 gpio
+config-pin P2_01 gpio
+
+config-pin P2_04 gpio
+config-pin P1_34 gpio
+config-pin P2_33 gpio
+config-pin P2_18 gpio
+config-pin P2_08 gpio
+config-pin P1_12 gpio
+
 
 ### GPIO PIN 14: PWN OUTPUT FOR BUZZER
 config-pin P1_36 pwm # buzzer
-config-pin P2_18 pwm # pin 14
+
 
 ### GPIO PINS 15 - 18: DIGITAL OUTPUTS FOR BUTTONS
-config-pin P2_19 gpio # pin 15
-config-pin P2_20 gpio # pin 16
-config-pin P2_21 gpio # pin 17
-config-pin P2_22 gpio # pin 18
+config-pin P1_02 gpio # pin 15
+config-pin P1_04 gpio # pin 16
+config-pin P1_06 gpio # pin 17
+config-pin P1_08 gpio # pin 18
 
 ### POCKETBEAGLE I2C PINS: IMU 
 config-pin P2_09 i2c # I2C1_SCL
