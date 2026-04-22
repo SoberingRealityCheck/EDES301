@@ -59,10 +59,10 @@ class HardwareManager:
 
         # Buttons — keyed by logical name
         self.buttons = {
-            'left':   Button(_config["LEFT_BUTTON_PIN"]),
-            'right':  Button(_config["RIGHT_BUTTON_PIN"]),
-            'select': Button(_config["SELECT_BUTTON_PIN"]),
-            'back':   Button(_config["BACK_BUTTON_PIN"]),
+            'left':   Button(_config["LEFT_BUTTON_PIN"],   press_low=False),
+            'right':  Button(_config["RIGHT_BUTTON_PIN"],  press_low=False),
+            'select': Button(_config["SELECT_BUTTON_PIN"], press_low=False),
+            'back':   Button(_config["BACK_BUTTON_PIN"],   press_low=False),
         }
 
         self._start_button_threads()
