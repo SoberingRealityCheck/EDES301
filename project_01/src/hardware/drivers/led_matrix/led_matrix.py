@@ -18,8 +18,15 @@ class LEDMatrix:
 
     def __init__(self):
         try:
+            import os
             import pyledscape
-            self._matrix = pyledscape.pyLEDscape()
+            _pyledscape_dir = os.path.join(os.path.dirname(__file__), "pyledscape")
+            _prev_dir = os.getcwd()
+            os.chdir(_pyledscape_dir)
+            try:
+                self._matrix = pyledscape.pyLEDscape()
+            finally:
+                os.chdir(_prev_dir)
             self.simulation = False
         except ImportError:
             self._matrix = None
