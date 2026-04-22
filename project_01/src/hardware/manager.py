@@ -76,18 +76,21 @@ class HardwareManager:
         for name, button in self.buttons.items():
             t = threading.Thread(
                 target=self._button_loop,
-                args=(button,),
+                args=(name, button),
                 daemon=True,
                 name=f'btn-{name}',
             )
             t.start()
 
-    def _button_loop(self, button: Button) -> None:
+    def _button_loop(self, button_name: str, button: Button) -> None:
         """Loop target: call wait_for_press() indefinitely."""
         print(f"[Button] thread started for pin {button.pin}, initial is_pressed = {button.is_pressed()}")
         while True:
             try:
                 button.wait_for_press()
+                print(
+                    f"[Button] press detected: {button_name} (pin {button.pin}, duration {button.get_last_press_duration():.3f}s)"
+                )
             except Exception as e:
                 import traceback
                 print(f"[Button] ERROR on pin {button.pin}: {e}")
@@ -111,6 +114,7 @@ class HardwareManager:
             return
         cb = button.on_press_callback
         if cb is not None:
+            print(f"[Button] simulated press: {button_name} (pin {button.pin})")
             cb()
 
     # ------------------------------------------------------------------
