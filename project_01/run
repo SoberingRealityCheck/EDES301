@@ -37,6 +37,7 @@
 cd /var/lib/cloud9/EDES301/project_01
 
 ./configure_pins.sh
+./src/hardware/drivers/led_matrix/pyledscape/configure_pins.sh
 
 PYTHONPATH=src:src/hardware/drivers/led_matrix/pyledscape python3 run_device.py
 
