@@ -1,10 +1,10 @@
 # Window Device configuration
 
 # Buttons
-LEFT_BUTTON_PIN   : "P2_2"
-RIGHT_BUTTON_PIN  : "P2_8"
-SELECT_BUTTON_PIN : "P2_6"
-BACK_BUTTON_PIN   : "P2_4"
+LEFT_BUTTON_PIN   : "P1_2"
+RIGHT_BUTTON_PIN  : "P1_8"
+SELECT_BUTTON_PIN : "P1_6"
+BACK_BUTTON_PIN   : "P1_4"
 
 # LED matrix GPIO pins (Adafruit 32x32 panel)
 DISPLAY_GPIO_PINS : [
