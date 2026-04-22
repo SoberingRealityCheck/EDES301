@@ -84,8 +84,15 @@ class HardwareManager:
 
     def _button_loop(self, button: Button) -> None:
         """Loop target: call wait_for_press() indefinitely."""
+        print(f"[Button] thread started for pin {button.pin}")
         while True:
-            button.wait_for_press()
+            try:
+                button.wait_for_press()
+            except Exception as e:
+                import traceback
+                print(f"[Button] ERROR on pin {button.pin}: {e}")
+                traceback.print_exc()
+                break
 
     # ------------------------------------------------------------------
     # Simulator bridge
