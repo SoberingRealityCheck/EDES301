@@ -1,6 +1,5 @@
 # Window Device configuration
 
-
 # Buttons
 LEFT_BUTTON_PIN   : "P2_2"
 RIGHT_BUTTON_PIN  : "P2_8"
