@@ -11,10 +11,12 @@ All pins read HIGH (logic-high), which means buttons are seen as unpressed
 (pull-up configuration). Writes and setup calls are silently ignored.
 """
 
-HIGH = 1
-LOW  = 0
-IN   = "in"
-OUT  = "out"
+HIGH     = 1
+LOW      = 0
+IN       = "in"
+OUT      = "out"
+PUD_UP   = "pud_up"
+PUD_DOWN = "pud_down"
 
 
 def setup(pin, mode, **kwargs):

@@ -104,7 +104,8 @@ class Button():
 
     def _setup(self):
         """ Setup the hardware components. """
-        GPIO.setup(self.pin, GPIO.IN)
+        pull = GPIO.PUD_DOWN if self.unpressed_value == LOW else GPIO.PUD_UP
+        GPIO.setup(self.pin, GPIO.IN, pull_up_down=pull)
 
 
     def is_pressed(self):
