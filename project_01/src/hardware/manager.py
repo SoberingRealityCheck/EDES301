@@ -84,7 +84,8 @@ class HardwareManager:
 
     def _button_loop(self, button: Button) -> None:
         """Loop target: call wait_for_press() indefinitely."""
-        print(f"[Button] thread started for pin {button.pin}")
+        initial = GPIO.input(button.pin)
+        print(f"[Button] thread started for pin {button.pin}, initial read = {initial}")
         while True:
             try:
                 button.wait_for_press()
