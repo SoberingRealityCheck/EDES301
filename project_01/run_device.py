@@ -27,8 +27,9 @@ from state_machine import StateMachine
 if __name__ == "__main__":
     hw = HardwareManager(imu_class=RealIMU)
     sm = StateMachine(hw)
+    sm._running = True
     try:
-        sm._loop()          # run on main thread (blocking)
+        sm._loop()
     except KeyboardInterrupt:
         print("\nShutting down.")
     finally:
