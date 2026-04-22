@@ -1,20 +1,20 @@
 # Window Device configuration
-# Pin values are placeholders — update with real BeagleBone pin names
-# (e.g. "P9_12") before deploying to hardware.
+
 
 # Buttons
-LEFT_BUTTON_PIN   : "P9_11"   # placeholder
-RIGHT_BUTTON_PIN  : "P9_12"   # placeholder
-SELECT_BUTTON_PIN : "P9_13"   # placeholder
-BACK_BUTTON_PIN   : "P9_14"   # placeholder
+LEFT_BUTTON_PIN   : "P2_2"
+RIGHT_BUTTON_PIN  : "P2_8"
+SELECT_BUTTON_PIN : "P2_6"
+BACK_BUTTON_PIN   : "P2_4"
 
 # LED matrix GPIO pins (Adafruit 32x32 panel)
-DISPLAY_GPIO_PINS : ["P8_7", "P8_8", "P8_9", "P8_10", "P8_11", "P8_12",
-                     "P8_13", "P8_14", "P8_15", "P8_16", "P8_17", "P8_18",
-                     "P8_19"]
+DISPLAY_GPIO_PINS : [
+  "P2_6", "P2_2", "P1_20", "P2_3", 
+  "P2_24", "P2_22", "P2_10", "P2_1", 
+  "P2_4", "P1_34", "P2_33", "P2_18", "P2_8"]
 
 # Buzzer — hardware PWM pin for HCW-KC1206 passive piezo
-BUZZER_PIN : "P9_21"   # placeholder; must be a hardware-PWM-capable pin
+BUZZER_PIN : "P2_4"   # placeholder; must be a hardware-PWM-capable pin
 
 # IMU (I2C) — MPU-6050 default address
 IMU_I2C_BUS     : 1
