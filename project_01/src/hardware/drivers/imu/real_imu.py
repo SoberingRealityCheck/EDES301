@@ -16,38 +16,45 @@ TODO: implement _read_raw() for your specific IMU chip.
       Scale raw register values to these units before returning.
 """
 
+import struct
+import smbus2
+
 from .imu_base import IMUBase
+
+# MPU-6050 registers
+_PWR_MGMT_1   = 0x6B
+_ACCEL_XOUT_H = 0x3B
+_GYRO_XOUT_H  = 0x43
+_ACCEL_CONFIG  = 0x1C
+_GYRO_CONFIG   = 0x1B
+
+# Scale factors for default ±2g / ±250°/s ranges
+_ACCEL_SCALE  = 9.81 / 16384.0  # LSB → m/s²
+_GYRO_SCALE   = 1.0  / 131.0    # LSB → deg/s
 
 
 class RealIMU(IMUBase):
     """
-    Hardware IMU driver. Reads raw sensor registers in _read_raw() over I2C.
+    Hardware IMU driver for MPU-6050 over I2C.
     All integration math is inherited from IMUBase.
     """
 
     def __init__(self, i2c_bus: int = 1, i2c_address: int = 0x68, **kwargs):
-        """
-        Args:
-            i2c_bus     : I2C bus number (1 on BeagleBone Black)
-            i2c_address : I2C address of the IMU chip
-            **kwargs    : forwarded to IMUBase (sample_rate_hz, ema_alpha)
-        """
         super().__init__(**kwargs)
-        self._bus_num = i2c_bus
-        self._addr    = i2c_address
-        # TODO: open bus and configure sensor registers here
-        # Example (MPU-6050):
-        #   import smbus2
-        #   self._bus = smbus2.SMBus(i2c_bus)
-        #   self._bus.write_byte_data(i2c_address, 0x6B, 0)  # wake up
+        self._addr = i2c_address
+        self._bus  = smbus2.SMBus(i2c_bus)
+        # Wake the MPU-6050 (clears sleep bit)
+        self._bus.write_byte_data(self._addr, _PWR_MGMT_1, 0x00)
 
     def _read_raw(self) -> dict:
-        """
-        Read accelerometer and gyroscope registers.
-        TODO: replace placeholder with real register reads.
-        """
-        # Placeholder — returns stationary gravity vector, no rotation
+        # Read 6 accel bytes then 6 gyro bytes in two bursts
+        raw_a = self._bus.read_i2c_block_data(self._addr, _ACCEL_XOUT_H, 6)
+        raw_g = self._bus.read_i2c_block_data(self._addr, _GYRO_XOUT_H,  6)
+
+        ax, ay, az = struct.unpack('>hhh', bytes(raw_a))
+        gx, gy, gz = struct.unpack('>hhh', bytes(raw_g))
+
         return {
-            'accel': (0.0, 0.0, 9.81),
-            'gyro':  (0.0, 0.0, 0.0),
+            'accel': (ax * _ACCEL_SCALE, ay * _ACCEL_SCALE, az * _ACCEL_SCALE),
+            'gyro':  (gx * _GYRO_SCALE,  gy * _GYRO_SCALE,  gz * _GYRO_SCALE),
         }
