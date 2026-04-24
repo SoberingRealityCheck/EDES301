@@ -20,7 +20,7 @@ class LEDMatrix:
         try:
             import os
             import pyledscape
-            _pyledscape_dir = os.path.join(os.path.dirname(__file__), "pyledscape")
+            _pyledscape_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "pyledscape")
             _prev_dir = os.getcwd()
             os.chdir(_pyledscape_dir)
             try:
