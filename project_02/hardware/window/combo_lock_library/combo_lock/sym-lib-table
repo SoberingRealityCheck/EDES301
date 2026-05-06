@@ -1,0 +1,4 @@
+(sym_lib_table
+	(version 7)
+	(lib (name "combo_lock") (type "KiCad") (uri "${KIPRJMOD}/combo_lock.kicad_sym") (options "") (descr ""))
+)

@@ -1,0 +1,5 @@
+(fp_lib_table
+	(version 7)
+	(lib (name "combo_lock") (type "KiCad") (uri "${KIPRJMOD}/combo_lock_library/combo_lock/combo_lock.pretty") (options "") (descr ""))
+	(lib (name "Window") (type "KiCad") (uri "${KIPRJMOD}/Window.pretty") (options "") (descr ""))
+)

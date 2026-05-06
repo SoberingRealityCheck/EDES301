@@ -1,0 +1,4 @@
+(fp_lib_table
+	(version 7)
+	(lib (name "Window") (type "KiCad") (uri "/Users/clay/Documents/School/Engineering/EDES 301/EDES301/project_02/hardware/window/Window.pretty") (options "") (descr ""))
+)
