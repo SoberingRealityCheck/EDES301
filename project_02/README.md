@@ -4,6 +4,8 @@ This repo contains the KiCAD Project files for my 'Window to Another World' EDES
 
 ![3d_render](docs/3d_render.png)
 
+![gerber](docs/gerber.png)
+
 # Project Overview
 
 The Window is a device intended for art programs / simple games - it runs a linux system with a custom LED matrix display and connections to an IMU, a buzzer, and four buttons.
