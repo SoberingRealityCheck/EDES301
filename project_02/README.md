@@ -2,7 +2,7 @@
 
 This repo contains the KiCAD Project files for my 'Window to Another World' EDES 310 PCB project.
 
-![front_view](docs/front_view.png)
+![3d_render](docs/3d_render.png)
 
 # Project Overview
 
